@@ -12,7 +12,7 @@ class Alien(Sprite):
         self.settings = alien_invasion_settings
 
         # Carrega a imagem do alienígena e obtém seu rect
-        self.image = pygame.image.load("../images/alien.bmp")
+        self.image = pygame.image.load("images/alien.bmp")
         self.rect = self.image.get_rect()
 
         # Inicia cada novo alienígena próximo à parte superior esquerda da tela
@@ -40,3 +40,4 @@ class Alien(Sprite):
         screen_rect = self.screen.get_rect()
         if self.rect.right >= screen_rect.right or self.rect.left <= 0:
             return True
+
