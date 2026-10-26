@@ -1,9 +1,8 @@
 from abc import ABC, abstractmethod
 
-class IDesconto(ABC):
-    @abstractmethod
+class IDesconto:
     def calcular(self, valor):
-        pass
+        raise NotImplementedError
 
 class ICupom:
     def aplicar_cupom(self, codigo):
@@ -22,7 +21,7 @@ class Vip(IDesconto, ICupom, IVIP):
     def calcular(self, valor):
         return valor * 0.2
     
-    def aplicar_cupom(self, valor):
+    def aplicar_cupom(self, codigo):
         return True
     
     def validar_usuario_vip(self, usuario):
@@ -35,6 +34,7 @@ class Premium(IDesconto):
 class Pedido:
     def __init__(self, desconto: IDesconto):
         self.desconto = desconto
+
     def total(self, valor):
         return valor - self.desconto.calcular(valor)
 
@@ -50,7 +50,10 @@ if __name__ == "__main__":
     valor = 100
    
     pedido_normal = Pedido(Normal())
-    pedido_vip = Vip()
+    pedido_vip = Pedido(Vip())
+    pedido_premium = Pedido(Premium())
    
     print("Normal: ", pedido_normal.total(valor))
     print("Vip: ", pedido_vip.total(valor))
+    print("Premium:", pedido_premium.total(valor))
+
