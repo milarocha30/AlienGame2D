@@ -7,7 +7,7 @@ from src.desconto import Normal, Vip, Premium
     (300, 90)
 ])
 
-def desconto_premium(valor, esperado):
+def test_desconto_premium(valor, esperado):
     desconto = Premium()
     resultado = desconto.calcular(valor)
 
